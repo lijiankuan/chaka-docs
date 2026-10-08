@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="了解 Chaka 的本地数据处理、Codex 与模型服务的数据接收、保存和删除，以及政策网站的托管日志。">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  {{REVIEW_META}}
+  <title>隐私政策 · Chaka</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="./index.html" aria-label="Chaka 支持首页">Chaka</a>
+    <nav class="primary-nav" aria-label="主导航"><a href="./index.html">支持与安装</a><a href="./privacy.html" aria-current="page">隐私政策</a></nav>
+  </div></header>
+  {{REVIEW_BANNER}}
+  <div class="layout">
+    <nav class="toc" aria-label="本页目录"><p>本页内容</p><a href="#scope">适用范围</a><a href="#data">处理的数据与用途</a><a href="#recipients">数据接收方</a><a href="#retention">保存期限与删除</a><a href="#controls">安全与用户控制</a><a href="#limited-use">有限使用</a><a href="#changes">变更与联系</a></nav>
+    <main id="main">
+      <p class="eyebrow">CHAKA / PRIVACY</p>
+      <h1>隐私政策</h1>
+      <p class="meta">{{POLICY_DATE}}</p>
+      <div class="summary"><p>Chaka 在你的设备上处理和保存页面、对话及项目上下文，不将这些任务内容上传至 Chaka 运营方服务器。你发起任务后，本机 Codex 会处理相关内容，并可能依你的配置发送至模型服务商。</p></div>
+
+      <section aria-labelledby="scope"><h2 id="scope">1. 适用范围</h2>
+        <p>本政策说明 Chaka 浏览器扩展、Chaka Desktop / Sidecar，以及本支持与政策网站如何处理数据。运营主体为 <strong>lijiankuan</strong>，隐私联系邮箱为 <a href="mailto:lijiankuan_2012@outlook.com">lijiankuan_2012@outlook.com</a>。</p>
+        <p>Chaka 用于把你选择的网页内容与本地项目连接起来，生成行动建议并执行你发起的项目任务。首发公开任务仅支持 Codex。</p>
+      </section>
+
+      <section aria-labelledby="data"><h2 id="data">2. 处理的数据与用途</h2>
+        <dl><dt>可选浏览记录</dt><dd>默认关闭。只有你在扩展设置的“数据与隐私”中明确启用后，Chaka 才在浏览器本地记录普通 HTTP(S) 网页的地址、标题、域名、访问时间和标签页信息，供你查看记录、找回页面。不记录无痕窗口；该功能不采集网页正文，也不自动将浏览记录发送给 Agent。升级不会把旧版默认开启视为你的同意。</dd>
+        <dt>页面内容、任务与附件</dt><dd>扩展会在可用页面上显示交互入口，并为内容选择和本地预览读取页面信息；不能将这概括为仅在发送瞬间读取页面。你点击“拿来用”、发送对话或发起行动时，当前页面标题、网址、摘取正文、任务文字及明确加入的图片、选区与来源会成为任务输入。发送前请确认其中没有不适合交给所选服务的个人或工作信息。</dd>
+        <dt>预览与未发送的上下文</dt><dd>仅打开面板生成的页面预览截图只用于本地展示，不作为 Agent 附件发送，也不持久化为历史。你明确添加的图片、来源、选区和附件引用可能在本机保存，以便关闭面板或切换标签页后恢复；仍需点击“发送”才进入 Codex 处理链路。</dd>
+        <dt>项目上下文与行动结果</dt><dd>你选择项目后，本机 Chaka 可读取项目描述、README、项目说明、Git 元数据和目录结构，并在发起任务时附加所需的项目摘要。执行行动后，Codex 可根据任务进一步读取或修改文件、运行命令及访问网络。当前执行过程不会逐条请求确认；项目工作目录用于组织变更，不构成操作系统级完全隔离。</dd>
+        <dt>本机保存的数据</dt><dd>对话、来源、运行结果和附件引用保存在浏览器本地；剪藏内容、图片附件和生成图保存在本机 Chaka 数据目录。项目路径、连接状态和偏好用于连接和恢复。Sidecar 还在本机保存安装状态、连接和运行诊断记录，可能包含时间、版本、运行标识、错误及本机路径，用于排查问题。Chaka 不建立自有云端用户画像。</dd></dl>
+      </section>
+
+      <section aria-labelledby="recipients"><h2 id="recipients">3. 数据接收方</h2>
+        <h3>本机 Codex 与模型服务</h3>
+        <p>扩展通过本机通信将你发起的任务交给 Sidecar，再由它调用你本机安装、登录和配置的 Codex。你明确提交的页面、对话、附件及项目上下文可能依 Codex 配置发送至相应模型服务商；它们并非始终离线处理。实际接收方、处理地点、保留和删除规则取决于你使用的服务及其条款、隐私政策和账户设置。</p>
+        <p>Chaka 不将这些任务内容上传至 Chaka 运营方服务器。执行任务产生的网络请求、外部工具或你要求上传的产物，还会涉及相应目标服务。请在发送前核对自己的 Codex 服务配置；本地保存与没有云端同步不代表任务不会外发。</p>
+        <h3>政策网站托管：GitHub Pages</h3>
+        <p>本网站{{HOSTING_VERB}} GitHub Pages 提供静态文档。页面本身不加入统计脚本、广告、第三方字体、表单或登录，不主动设置 Cookie 或浏览器本地存储。</p>
+        <p>GitHub 明确说明：访问 GitHub Pages 网站时，访问者的 IP 地址会因安全目的被记录和保存，无论是否登录 GitHub。这属于网站托管日志，与 Chaka 的任务内容不同。请参阅 <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub Pages 数据收集说明</a>及 <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub 隐私声明</a>。这些说明未给出 Pages 安全 IP 日志统一的固定保留天数；处理与保留由 GitHub 按其政策管理，Chaka 不承诺替 GitHub 删除该日志。</p>
+        <h3>你主动联系支持时</h3>
+        <p>如果你向支持邮箱发信，运营方会收到你的邮箱地址、邮件正文及你主动提供的附件，用于回复咨询、定位问题或处理隐私请求。邮箱使用 Outlook.com，邮件传递和保存也涉及 Microsoft 及你使用的发信服务；参阅 <a href="https://www.microsoft.com/en-us/privacy/privacystatement">Microsoft 隐私声明</a>。请只发送必要且已脱敏的材料。</p>
+        {{SUPPORT_RETENTION}}
+        <h3>其他运营处理</h3>
+        {{OPERATIONS}}
+      </section>
+
+      <section aria-labelledby="retention"><h2 id="retention">4. 保存期限与删除</h2>
+        <dl><dt>自动浏览记录</dt><dd>按日访问记录和旧专注记录采用 30 天清理规则，在扩展运行时执行清理；不代表浏览器关闭期间也会准时删除。浏览时间线索引、保留的旧浏览会话摘要等其他记录保留至手动删除，不能将所有数据概括为“30 天后自动消失”。</dd>
+        <dt>停止与删除浏览记录</dt><dd>“停止记录”只停止后续采集，已有记录继续保留。“停止并删除浏览记录”会先停止记录，再清理该功能的自动记录、派生摘要和索引；若失败，界面会显示错误，你可以重试。该操作不删除手动生成的浏览报告、对话、图片、Reader 剪藏或项目文件。已退役的自动 Feed 和周期摘要会在扩展启动时清理，失败时可以通过上述删除操作重试。</dd>
+        <dt>对话与图片</dt><dd>对话历史有数量上限，也可在历史界面删除。运行中的对话须先取消；仍被子对话引用的父对话须先处理引用。图片作为本机历史资产保留至引用解除后尝试回收，不承诺固定保存天数。删除对话后会尝试清理不再被其他记录引用的图片；仍有引用的图片继续保留。</dd>
+        <dt>附件清理失败</dt><dd>对话删除成功后，附件清理失败不会恢复已删除的对话。当前历史面板会显示部分完成并提供“重试附件清理”；请检查 Sidecar 连接后重试。关闭面板后不会自动重试，未回收的图片可能仍留在本机。</dd>
+        <dt>Sidecar 设置、安装与诊断记录</dt><dd>这些本机文件没有统一的自动过期时间，不随浏览记录或对话删除，也不会仅因退出 Sidecar 而全部清除。如需清理，请先退出 Sidecar，再通过支持邮箱获取适用于当前版本的清理说明，避免误删仍需保留的任务资产。</dd>
+        <dt>其他本机与第三方数据</dt><dd>Reader 剪藏正文和资源需要在 Reader 中单独删除。独立行动记录、项目产物、Codex 自身历史和模型服务商的数据不会随对话删除；删除本机记录不能撤回服务商已经处理的数据。卸载扩展也不等于删除 Sidecar、Codex 或项目中的文件。支持邮件的保留说明见上一节。</dd></dl>
+      </section>
+
+      <section aria-labelledby="controls"><h2 id="controls">5. 安全与用户控制</h2>
+        <p>你可以不启用浏览记录、停止记录、按功能范围清理本机数据，以及不发送敏感页面、附件或项目。已提交的任务需要通过取消操作停止；关闭网页或面板不一定终止运行，取消也不能撤销已完成的文件改动或数据处理。</p>
+        <p>Chaka 对本机通信实施来源与运行边界检查，并使用本机文件权限保护相关文件；这不构成全部数据应用层加密的承诺。网页中的面板不应被视为保密容器，宿主页脚本可能观察其中展示的内容；请勿在不可信网页中展示敏感资料。</p>
+      </section>
+
+      <section aria-labelledby="limited-use"><h2 id="limited-use">6. 有限使用（Limited Use）</h2>
+        {{LIMITED_USE_REVIEW}}
+        <p>Chaka 对从浏览器及 Chrome API 获得的用户数据的使用和向其他应用的传输遵守 <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use">Chrome Web Store 用户数据政策，包括 Limited Use 要求</a>。数据仅用于本政策和产品界面披露的单一用途及相关功能；这一限制也适用于从原始数据衍生的信息。</p>
+        <p>Chaka 不出售这些数据，不将其用于个性化广告、数据经纪、信用评估或借贷用途。向其他方传输仅限于提供或改进所披露功能所必需、遵守法律、保护安全，或事先获得用户明确同意的合并、收购或资产转让情形。</p>
+        <p>除你明确同意阅读特定数据、符合政策的匿名汇总内部运营、安全调查或法律要求等允许情形外，不允许人工阅读这些用户数据。主动向支持邮箱发送材料时，请只提供你同意用于处理该请求的必要内容。</p>
+      </section>
+
+      <section class="contact" aria-labelledby="changes"><h2 id="changes">7. 政策变更与联系</h2>
+        <p>当数据类别、用途或接收方变化时，Chaka 会更新本页及相关产品内说明，并标明新的生效日期。需要重新明确同意的处理，不会仅凭旧版默认设置启用。</p>
+        <p>对于政策疑问，或对运营方持有的支持邮件提出访问、更正、删除请求，请联系 <a href="mailto:lijiankuan_2012@outlook.com">lijiankuan_2012@outlook.com</a>。本机数据请按上述功能入口管理；模型服务商和 GitHub 持有的数据需使用各自的隐私渠道处理。</p>
+        <p><a href="./index.html#data">查看数据清理帮助</a> · <a href="./index.html#contact">联系支持</a></p>
+      </section>
+    </main>
+  </div>
+  <footer class="site-footer"><div class="footer-inner"><span>Chaka · 运营主体 lijiankuan</span><a href="./index.html">支持与安装</a></div></footer>
+</body>
+</html>
