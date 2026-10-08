@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chaka 的安装准备、首次使用、连接排查、数据清理与支持联系方式。">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  {{REVIEW_META}}
+  <title>支持与安装 · Chaka</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="./index.html" aria-label="Chaka 支持首页">Chaka</a>
+    <nav class="primary-nav" aria-label="主导航"><a href="./index.html" aria-current="page">支持与安装</a><a href="./privacy.html">隐私政策</a></nav>
+  </div></header>
+  {{REVIEW_BANNER}}
+  <div class="layout">
+    <nav class="toc" aria-label="本页目录"><p>本页内容</p><a href="#requirements">使用前准备</a><a href="#installation">安装与连接</a><a href="#first-task">第一次使用</a><a href="#troubleshooting">连接与任务排查</a><a href="#data">数据与删除</a><a href="#contact">联系支持</a></nav>
+    <main id="main">
+      <p class="eyebrow">CHAKA / HELP</p>
+      <h1>支持与安装</h1>
+      <p class="lead">连接网页和本地项目，使用你本机配置的 Codex 完成任务。</p>
+      <div class="summary"><p>Chaka 需要浏览器扩展与本机 Sidecar 配合运行。首发仅支持 Codex；模型服务可能联网处理任务并另行收费。发送前请阅读<a href="./privacy.html">隐私政策</a>。</p></div>
+
+      <section aria-labelledby="requirements"><h2 id="requirements">使用前准备</h2>
+        <ul><li>Chrome 浏览器，以及与扩展版本匹配的 Chaka Sidecar。</li><li>本机已安装、可正常使用的 Codex，以及有效的账户登录或模型服务配置。</li><li>你有权使用的项目目录。首次体验建议选择不含敏感数据的示例项目。</li></ul>
+        <h3>正式发行入口</h3>
+        {{RELEASE_LINKS}}
+        <p>这里仅提供安装帮助与项目文档。未列出正式地址时，请通过下方邮箱咨询发布状态。</p>
+      </section>
+
+      <section aria-labelledby="installation"><h2 id="installation">安装与连接</h2>
+        <p>以下步骤适用于正式发行入口提供后；不表示当前已开放商店下载。</p>
+        <ol><li><strong>安装扩展。</strong>从正式 Chrome Web Store 页面安装 Chaka，按引导固定工具栏入口。</li>
+          <li><strong>安装 Sidecar。</strong>下载对应版本的 macOS 安装包，打开磁盘映像，将 Chaka 拖入“应用程序”并启动。按系统正常提示完成首开。</li>
+          <li><strong>准备 Codex。</strong>按照 <a href="https://developers.openai.com/codex/cli/">Codex 官方安装与登录说明</a>完成配置，在 Sidecar 中确认 Codex 可用。不要把账户密码或 API 密钥发给支持人员。</li>
+          <li><strong>连接 Chrome。</strong>按 Sidecar 的浏览器连接引导操作，在实际使用的 Chrome 个人资料中打开 Chaka 引导页，点击“重新检查”。等待本机连接就绪。</li>
+          <li><strong>选择项目。</strong>在 Chaka 中选择项目目录，核对显示的项目名称，再打开普通 HTTP(S) 网页开始使用。</li></ol>
+        <p>如果 macOS 提示安装包损坏、无法验证开发者或无法打开，请保留错误信息并联系支持。不要关闭系统安全保护来跳过安装检查。</p>
+      </section>
+
+      <section aria-labelledby="first-task"><h2 id="first-task">第一次使用</h2>
+        <ol><li>在网页右下角打开 Chaka 的 Dock，确认连接状态和当前项目。</li><li>在新会话点击“拿来用”请求页面行动建议，或输入问题并点击“发送”。这些操作会把当前网页和所选上下文交给本机 Codex，内容可能继续发送至模型服务商。</li><li>需要图片时，明确添加图片或选区到对话，再点击“发送”。仅打开面板生成的页面预览截图不会自动作为附件发出。</li><li>审阅建议后再决定是否执行项目任务。行动可读取、修改文件、运行命令及访问网络，当前执行过程不会逐条请求确认；项目工作目录不提供操作系统级完全隔离。</li><li>在对话中查看结果。需要停止时点击取消；关闭面板、页面或标签页不一定终止已发送的任务。</li></ol>
+      </section>
+
+      <section aria-labelledby="troubleshooting"><h2 id="troubleshooting">连接与任务排查</h2>
+        <dl><dt>提示未安装 Sidecar 或找不到本机连接</dt><dd>确认 Sidecar 已安装并正在运行；回到其浏览器连接引导，确认使用的是安装了 Chaka 的 Chrome 个人资料，再在扩展引导页点击“重新检查”。只安装扩展还不能运行任务。</dd>
+        <dt>Codex 不可用或任务报错</dt><dd>先确认 Codex 自身可正常登录和运行，再检查账户额度、模型配置和网络。Chaka 首发不会自动改用其他 Agent。保留界面错误文字，联系支持时注明任务停在哪一步。</dd>
+        <dt>某些页面没有 Dock 或无法读取</dt><dd>请在普通 HTTP(S) 网页尝试，确认扩展已启用且该网站的浮层没有被关闭。浏览器内部页、商店页等受限制页面可能无法注入扩展内容。</dd>
+        <dt>想停止任务</dt><dd>在任务界面点击取消。关闭标签页与取消任务不同；取消不会撤销已写入项目的文件，也不能撤回模型服务商已经处理的数据。</dd>
+        <dt>删除后仍提示附件未清理</dt><dd>保持历史面板打开，确认 Sidecar 连接可用，然后点击“重试附件清理”。对话可能已经删除，未回收图片仍可能留在本机；关闭面板后不会自动重试。</dd></dl>
+      </section>
+
+      <section aria-labelledby="data"><h2 id="data">数据与删除</h2>
+        <p>在扩展设置的“数据与隐私”中管理可选浏览记录。它默认关闭；“停止记录”只停止后续记录，“停止并删除浏览记录”同时清理该功能的本机记录。</p>
+        <p>这不会删除对话、手动浏览报告、图片、Reader 剪藏、项目文件或 Codex／模型服务商的数据。对话可在历史中删除，Reader 剪藏需单独删除；卸载扩展也不会自动清空 Sidecar 与 Codex 文件。详情见<a href="./privacy.html#retention">保存期限与删除边界</a>。</p>
+      </section>
+
+      <section class="contact" aria-labelledby="contact"><h2 id="contact">联系支持</h2>
+        <p>运营主体：lijiankuan<br>支持与隐私邮箱：<a href="mailto:lijiankuan_2012@outlook.com">lijiankuan_2012@outlook.com</a></p>
+        <p>建议说明 macOS、Chrome、Chaka 和 Codex 的版本，问题出现的步骤、预期结果及界面错误。截图或日志请先遮盖网页内容、项目路径、个人信息和密钥，只提供定位问题所需的最少材料。</p>
+        <p>请勿发送密码、API 密钥、完整浏览历史或不必要的项目文件。支持邮件及你主动提供的附件会由运营方和邮箱服务处理，详见<a href="./privacy.html#recipients">数据接收方与支持邮件说明</a>。</p>
+      </section>
+    </main>
+  </div>
+  <footer class="site-footer"><div class="footer-inner"><span>Chaka · 运营主体 lijiankuan</span><span><a href="./privacy.html">隐私政策</a> · <a href="#contact">联系支持</a></span></div></footer>
+</body>
+</html>
