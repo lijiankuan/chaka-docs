@@ -13,8 +13,9 @@ const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({
 }[char]));
 const missing = [];
 const date = config.effectiveDate;
-if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)
-  || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date) {
+const validDate = typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)
+  && Number.isFinite(Date.parse(date)) && new Date(date).toISOString().slice(0, 10) === date;
+if (!validDate) {
   missing.push('effectiveDate: confirmed, valid YYYY-MM-DD date');
 }
 for (const field of ['operationsDisclosure', 'supportRetention']) {
@@ -46,7 +47,7 @@ const links = [
 const replacements = {
   REVIEW_META: release ? '' : '<meta name="robots" content="noindex, nofollow">',
   REVIEW_BANNER: release ? '' : '<div class="review-banner"><strong>本地审阅稿 · 尚未发布</strong><span>发布确认尚未完成；此页面不是已生效的公开政策。</span></div>',
-  POLICY_DATE: release ? `生效日期：${escape(date)}` : '生效日期尚未确定 · 建议采用正式公开日',
+  POLICY_DATE: validDate ? `生效日期：${escape(date)}` : '生效日期尚未确定 · 建议采用正式公开日',
   OPERATIONS: config.operationsDisclosure ? `<p>${escape(config.operationsDisclosure)}</p>` : pending('是否存在额外下载日志、诊断、遥测、崩溃分析或客服服务，以及各自的接收方、用途、数据类别和保留规则。源码核查不能替代运营事实。'),
   SUPPORT_RETENTION: config.supportRetention ? `<p>${escape(config.supportRetention)}</p>` : pending('运营方对支持邮件及附件的保留、删除规则。当前不承诺未经确认的保存天数或回复时限。'),
   LIMITED_USE_REVIEW: release ? '' : pending('下列为拟发布的 Limited Use 承诺，发布者须确认实际运营和所支持的服务配置与承诺一致。该声明不代表平台已完成审核。'),
