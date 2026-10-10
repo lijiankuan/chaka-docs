@@ -24,7 +24,7 @@ python3 -m http.server 8080 --bind 127.0.0.1 --directory _site
 | `supportRetention` | 运营方如何保留和删除支持邮件、附件；不擅自承诺天数、回复时限或服务商后台删除能力 |
 | `limitedUseConfirmed` | 发布者核对真实运营及所支持服务配置符合正文的 Limited Use 承诺后设为 `true` |
 | `storeUrl` / `downloadUrl` | 已核实、匿名可用的正式 HTTPS 地址。尚未开放时保留 `null`，页面如实显示未公开，不妨碍先发布政策 |
-| `releaseDetails` | 配置任一安装链接时必须填写已验证的平台、架构、Sidecar 与兼容 Codex 版本说明 |
+| `releaseDetails` | 配置任一安装链接时必须填写已验证的平台、架构、Chaka 桌面端与兼容 Codex 版本说明 |
 
 文本字段作为纯文本转义，不接受 HTML。未知的生效日、运营说明、邮件保留规则或 Limited Use 确认会阻止正式构建。构建只输出两个页面、CSS 和 `.nojekyll`，不会上传源文件、配置或本 README。
 

@@ -33,7 +33,7 @@ for (const field of ['storeUrl', 'downloadUrl']) {
   }
 }
 if ((config.downloadUrl || config.storeUrl) && !(typeof config.releaseDetails === 'string' && config.releaseDetails.trim())) {
-  missing.push('releaseDetails: verified platform, Sidecar and compatible Codex versions');
+  missing.push('releaseDetails: verified platform, Chaka desktop app and compatible Codex versions');
 }
 if (release && missing.length) {
   console.error(`Release blocked; no site generated:\n- ${missing.join('\n- ')}`);
@@ -41,8 +41,8 @@ if (release && missing.length) {
 }
 const pending = (text) => `<p class="review-note"><strong>发布前待确认：</strong>${escape(text)}</p>`;
 const links = [
-  config.storeUrl ? `<li><a href="${escape(config.storeUrl)}">在 Chrome Web Store 安装 Chaka</a></li>` : '<li>Chrome Web Store 正式入口尚未公开。</li>',
-  config.downloadUrl ? `<li><a href="${escape(config.downloadUrl)}">下载 Chaka Sidecar</a></li>` : '<li>Chaka Sidecar 正式安装包地址尚未公开。</li>',
+  config.storeUrl ? `<li><a href="${escape(config.storeUrl)}">在 Chrome Web Store 安装 Chaka 浏览器扩展</a></li>` : '<li>Chrome Web Store 正式入口尚未公开。</li>',
+  config.downloadUrl ? `<li><a href="${escape(config.downloadUrl)}">下载 Chaka for Mac</a></li>` : '<li>Chaka 桌面端正式安装包地址尚未公开。</li>',
 ];
 const replacements = {
   REVIEW_META: release ? '' : '<meta name="robots" content="noindex, nofollow">',
