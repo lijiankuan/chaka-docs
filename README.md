@@ -1,6 +1,6 @@
 # Chaka 公开文档
 
-只有支持与安装（`index.html`）和隐私政策（`privacy.html`）两个页面。无浏览器脚本、第三方字体、统计、表单或依赖安装步骤。此仓库不包含 Chaka 产品源码。
+支持与安装（`index.html`）和隐私政策（`privacy.html`）保持无浏览器脚本、第三方字体、统计或表单。可选的 `static/app/` 存放经审阅的 Chaka 产品页面构建产物，使用本地 JS、字体和既有展示素材；视频功能尚未开发，首发页面不展示视频能力或加载相应外部素材。不包含产品源码或桌面安装包。
 
 ## 本地审阅
 
@@ -55,3 +55,15 @@ node scripts/build.mjs --release
 - [使用限制](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
 - [自定义 Pages 工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 - [Chrome Web Store Limited Use](https://developer.chrome.com/docs/webstore/program-policies/limited-use)
+
+## 产品首页与 GitHub Releases
+
+产品页位于 `/chaka-docs/app/`，支持页和隐私页地址保持原样。Installer ZIP 为主下载，DMG 为备用，两者放在本仓库的 GitHub Releases。
+
+1. 在产品工作区按 `docs/ops/runbooks/github-public-site.md` 生成本地预览并审阅。
+2. 由发布者手动发布经过验收的 GitHub Release；构建正式页面会检查两个公开附件的哈希。
+3. 将正式导出的 `app/` 复制到本仓库 `static/app/`；不要复制整个候选目录、日志、源码快照、安装包或本地 preview。
+4. 执行 `node scripts/build.mjs --release` 后审阅 `_site/`，经授权提交、推送。
+5. 仍由发布者点击原有 **Run workflow**；没有新增自动部署触发器。
+
+纯本地联合审阅：`node scripts/build.mjs --landing /absolute/path/to/export/app`。`--landing` 不允许与 `--release` 合用，正式构建也会拒绝 `preview: true` 的页面包。
