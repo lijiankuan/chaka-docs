@@ -40,6 +40,10 @@ jobs:
           git archive "$DOCS_SHA" src release.json scripts/build.mjs | tar -x -C "$docs_dir"
           node "$docs_dir/scripts/build.mjs" --release
           cp "$docs_dir/_site/"{index.html,privacy.html,styles.css} _site/
+      - name: Record the published support and privacy revision for product updates
+        env:
+          DOCS_SHA: ${{ inputs.published_docs_sha || github.sha }}
+        run: echo "$DOCS_SHA" > _site/root-docs-revision.txt
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
