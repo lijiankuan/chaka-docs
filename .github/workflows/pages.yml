@@ -3,6 +3,11 @@ name: Publish public documentation
 # Publishing is an explicit action, even after a source update.
 on:
   workflow_dispatch:
+    inputs:
+      published_docs_sha:
+        description: 'Product pages only: keep the root documents from this deployed commit (full SHA)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -16,10 +21,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - run: node scripts/build.mjs --release
+      - name: Preserve deployed support and privacy pages for a product-only deployment
+        if: inputs.published_docs_sha != ''
+        env:
+          DOCS_SHA: ${{ inputs.published_docs_sha }}
+        run: |
+          [[ "$DOCS_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git merge-base --is-ancestor "$DOCS_SHA" HEAD
+          test -f _site/app/index.html
+          docs_dir="$(mktemp -d)"
+          git archive "$DOCS_SHA" src release.json scripts/build.mjs | tar -x -C "$docs_dir"
+          node "$docs_dir/scripts/build.mjs" --release
+          cp "$docs_dir/_site/"{index.html,privacy.html,styles.css} _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

@@ -16,7 +16,19 @@ const landing = landingFlag === -1 ? path.join(root, 'static/app') : path.resolv
 const landingExists = await stat(landing).then(s => s.isDirectory()).catch(error => { if (error.code === 'ENOENT') return false; throw error; });
 if (landingFlag !== -1 && !landingExists) throw new Error('Landing export directory not found');
 let product = null;
-if (landingExists) {
+// A pages-only export is explicitly marked and does not contain a release manifest.
+const pagesOnly = landingExists && await stat(path.join(landing, 'site.json')).then(() => true, error => {
+  if (error.code === 'ENOENT') return false;
+  throw error;
+});
+if (pagesOnly) {
+  const state = JSON.parse(await readFile(path.join(landing, 'site.json'), 'utf8'));
+  if (state.downloads !== 'closed' || config.downloadUrl) throw new Error('Expected a site with downloads closed');
+  if (await stat(path.join(landing, 'release.json')).then(() => true, error => {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  })) throw new Error('Closed downloads cannot include a release manifest');
+} else if (landingExists) {
   product = JSON.parse(await readFile(path.join(landing, 'release.json'), 'utf8'));
   if (product.schemaVersion !== 1 || typeof product.preview !== 'boolean') throw new Error('Invalid product site metadata');
   if (release && product.preview) throw new Error('Local preview cannot be published');
@@ -68,9 +80,10 @@ const links = [
   config.storeUrl ? `<li><a href="${escape(config.storeUrl)}">在 Chrome Web Store 安装 Chaka 浏览器扩展</a></li>` : '<li>Chrome Web Store 正式入口尚未公开。</li>',
   config.downloadUrl ? `<li><a href="${escape(config.downloadUrl)}">下载 Chaka 桌面端（macOS）</a></li>` : (product ? '' : '<li>Chaka 桌面端正式安装包地址尚未公开。</li>'),
 ];
+if (pagesOnly) links.push('<li><a href="./app/">Chaka 产品首页</a></li>');
 if (product) links.push(`<li><a href="./app/">Chaka 产品首页</a> · <a href="${escape(product.assets.installer.url)}">下载 Installer（ZIP）</a> · <a href="${escape(product.assets.dmg.url)}">DMG 备用下载</a></li>`);
 const replacements = {
-  LANDING_LINK: product ? '<a href="./app/">产品首页</a>' : '',
+  LANDING_LINK: landingExists ? '<a href="./app/">产品首页</a>' : '',
   REVIEW_META: release ? '' : '<meta name="robots" content="noindex, nofollow">',
   REVIEW_BANNER: release ? '' : '<div class="review-banner"><strong>本地审阅稿 · 尚未发布</strong><span>发布确认尚未完成；此页面不是已生效的公开政策。</span></div>',
   POLICY_DATE: validDate ? `生效日期：${escape(date)}` : '生效日期尚未确定 · 建议采用正式公开日',
@@ -96,7 +109,7 @@ for (const file of files) {
   }
   await writeFile(path.join(output, file), content);
 }
-if (product) await cp(landing, path.join(output, 'app'), { recursive: true });
+if (landingExists) await cp(landing, path.join(output, 'app'), { recursive: true });
 await writeFile(path.join(output, '.nojekyll'), '');
 console.log(`${release ? 'Release' : 'Review'} build: ${files.length + 1} files in _site/`);
 if (!release) console.log(`Unresolved release fields: ${missing.length}`);
